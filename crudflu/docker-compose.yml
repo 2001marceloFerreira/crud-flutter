@@ -1,0 +1,19 @@
+version: '3.3'
+
+networks:
+   aw-networks:
+      driver: bridge
+
+volumes:
+   prometheus_data:
+
+services:
+   prometheus:
+      image: prom/prometheus:latest
+      volumes:
+        - ./config-prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  #connectando com o container
+        - prometheus_data:/prometheus   #armazenar os dados 
+      networks:
+         - aw-network
+      ports: 
+        - 9090:9090   
